@@ -1,4 +1,4 @@
-function cs_rx_toa_error = uwb_posistion_cs_rx_toa(tag_x,tag_y)
+function [cs_rx_toa_error, cs_rx_time_dur] = uwb_posistion_cs_rx_toa(tag_x,tag_y,EbNo,pulse_order);
 %------------------------------------------------------------------------------
 %                          UWB positioning system
 % Programmed by Chenhao
@@ -17,7 +17,6 @@ function cs_rx_toa_error = uwb_posistion_cs_rx_toa(tag_x,tag_y)
 % - Indoor channel ieee802.15.4a, LOS, CM1
 %------------------------------------------------------------------------------
 
-%clear all;
 close all;
 clc;
 
@@ -37,19 +36,17 @@ t1 = .5E-9; %pulse width(0.5 nanoseconds)
 pri = 200e-9;
 
 % The SNR range (in dB)
-EbNo = -15;
+%EbNo = -15;
  
 % Number of bits
 num_bits = 10;
-
-rand_proj_valid = 1;
-cosamp_valid = 1;
 
 %------------------------------------------------------------------------------
 % locations
 %------------------------------------------------------------------------------
 
 % Tag's initial coordinate
+% Tag = [1 1];
 Tag = [tag_x tag_y];
 
 % Coordinates of APs
@@ -62,23 +59,13 @@ num_ap = length(AP);
 % Gaussian pulse generation
 %------------------------------------------------------------------------------
 
-pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
+%pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
 A = 1; %positive amplitude
-[y] = monocycle(fs, ts, t, t1, A, pulse_order); ref = y;
+[y] = monocycle(fs, ts, t, t1, A, pulse_order);
+ref = y;
 n_pulse_pri = round(pri/ts);          % Sampling of PRI
 sig = zeros(1,n_pulse_pri);    
 sig(1:length(y)) = y;                 % One pulse in one PRI
-
-%------------------------------------------------------------------------------
-% random projection on pulse generation
-%------------------------------------------------------------------------------
-
-rand_index = sort(randperm(length(sig),1500));
-sig_cs = zeros(1,length(sig)); 
-sig_cs(rand_index) = sig(rand_index);
-if rand_proj_valid==1
-    sig = sig_cs; 
-end
 
 %-----------------------------------------------------------------
 % LOS distance estimation
@@ -130,44 +117,38 @@ end
 %-------------------------------------------------------
 % Receive and Xccorlation, Compressed Sensing Framework
 %-------------------------------------------------------
-    
+
 for i = 1:num_ap
     
     %receive signal from all channels
     ap_tag_chan_wgn_tmp = ap_tag_chan_wgn(:,:,i);
     received_signl_ap = sum(ap_tag_chan_wgn_tmp)/num_bits;
-       
+
     %xccorlation
     xc = xcorr(ref, received_signl_ap); 
     [a,delay(i)]=max(xc);
     TOA(i) = (length(sig) - delay(i)) * ts;
     
-    if cosamp_valid==1    
     %compressed sensing framework
-    load randmodu.mat
-    y_cs = A*received_signl_ap';
+    rand_cs_rx_fixed = 1; % fixed sensing measurement 
+    if rand_cs_rx_fixed == 0
+      [A,y_cs] = randmodu(received_signl_ap',1500);
+    else
+      load randmodu.mat
+      y_cs = A*received_signl_ap';
+    end
     received_signl_ap_cs = cosamp(A,y_cs,1,1e-5,20);
         
     %compressive sensing xccorlation
     xc_cs = xcorr(ref, received_signl_ap_cs);
     [a,cs_delay(i)]=max(xc_cs);
     CS_TOA(i) = (length(sig) - cs_delay(i)) * ts;
-    end
-    
     
 end
 
 %-------------------------------------------------------
-% TOA locationing  
-%-------------------------------------------------------
-
-time_ap_tag = time_ap_tag;
-time_dur = TOA;
-toa_error = toa(AP, Tag, time_dur, light_speed);
-
-%-------------------------------------------------------
 % CS(compressed sensing) + TOA locationing  
 %-------------------------------------------------------
-
-cs_time_dur = CS_TOA;
-cs_rx_toa_error = toa(AP, Tag, cs_time_dur, light_speed);
+time_ap_tag = time_ap_tag;
+cs_rx_time_dur = CS_TOA;
+cs_rx_toa_error = toa(AP, Tag, cs_rx_time_dur, light_speed);

@@ -1,4 +1,4 @@
-function cs_tx_toa_error = uwb_posistion_cs_tx_toa(tag_x,tag_y)
+function [cs_tx_toa_error, cs_tx_time_dur] = uwb_posistion_cs_tx_toa(tag_x,tag_y,EbNo,pulse_order);
 % e.g. uwb_posistion_cs_tx_toa(1,1)
 %------------------------------------------------------------------------------
 %                          UWB positioning system
@@ -27,8 +27,6 @@ function cs_tx_toa_error = uwb_posistion_cs_tx_toa(tag_x,tag_y)
 
 close all;
 clc;
-%clear all;
-ccprint = 0;
 
 %------------------------------------------------------------------------------
 % Initialization
@@ -46,26 +44,18 @@ t1 = .5E-9; %pulse width(0.5 nanoseconds)
 pri = 200e-9;
 
 % The SNR range (in dB)
-EbNo = -15;
+%EbNo = -15;
  
 % Number of bits
 num_bits = 10;
-
-%------------------------------------------------------------------------------
-% compressed sensing items
-%------------------------------------------------------------------------------
-
-rand_proj_valid = 1
-channel_matrix_valid = 2
-fix_randinx = 1
-compressed_sensing_receivers=0    
 
 %------------------------------------------------------------------------------
 % locations
 %------------------------------------------------------------------------------
 
 % Tag's initial coordinate
-Tag = [tag_x tag_y]; % e.g. [1,1]
+% Tag = [1 1];
+Tag = [tag_x tag_y];
 
 % Coordinates of APs
 AP = [0 0; 0 10; 10 0]; % in meters
@@ -77,9 +67,10 @@ num_ap = length(AP);
 % Gaussian pulse generation
 %------------------------------------------------------------------------------
 
-pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
+%pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
 A = 1; %positive amplitude
-[y] = monocycle(fs, ts, t, t1, A, pulse_order); ref = y;
+[y] = monocycle(fs, ts, t, t1, A, pulse_order);
+ref = y;
 n_pulse_pri = round(pri/ts);          % Sampling of PRI
 sig = zeros(1,n_pulse_pri);    
 sig(1:length(y)) = y;                 % One pulse in one PRI
@@ -88,6 +79,7 @@ sig(1:length(y)) = y;                 % One pulse in one PRI
 % random projection on pulse generation
 %------------------------------------------------------------------------------
 
+fix_randinx = 1
 % random projection matrix
 if fix_randinx == 1 
     load randinx.mat;
@@ -102,9 +94,7 @@ end
 
 sig_cs = zeros(1,length(sig)); 
 sig_cs(rand_index) = sig(rand_index);
-if rand_proj_valid==1
-    sig = sig_cs; 
-end
+sig = sig_cs; 
 
 %-----------------------------------------------------------------
 % LOS distance estimation
@@ -146,20 +136,21 @@ end
 % Equval Matrix for channel convolution 
 % e.g. figure; plot((channel_matrix_tmp(:,:,1)'*sig')')
 %------------------------------------------------------------------------------
-if rand_proj_valid == 1
-    if channel_matrix_valid == 1
-        for j = 1:num_bits
-            channel_matrix_tmp(:,:,j) = rotmatrix([hi(:,j)' zeros(1,(length(sig)-length(hi(:,j))))],length(sig));
-        end
-        [chm,chn] = size(channel_matrix_tmp(:,:,1));
-        channel_matrix = zeros(chm,chn);
-        for j = 1:num_bits
-            channel_matrix = channel_matrix + channel_matrix_tmp(:,:,j);
-        end
-        channel_matrix = channel_matrix/num_bits;
-    elseif channel_matrix_valid == 2
-        load ~/Dropbox/Codes/channel_matrix_sum.mat
+
+channel_matrix_valid = 2
+
+if channel_matrix_valid == 1
+    for j = 1:num_bits
+        channel_matrix_tmp(:,:,j) = rotmatrix([hi(:,j)' zeros(1,(length(sig)-length(hi(:,j))))],length(sig));
     end
+    [chm,chn] = size(channel_matrix_tmp(:,:,1));
+    channel_matrix = zeros(chm,chn);
+    for j = 1:num_bits
+        channel_matrix = channel_matrix + channel_matrix_tmp(:,:,j);
+    end
+    channel_matrix = channel_matrix/num_bits;
+elseif channel_matrix_valid == 2
+    load ~/Dropbox/Codes/channel_matrix_sum.mat
 end
 
 %-------------------------------------------------------
@@ -176,77 +167,35 @@ end
 %-------------------------------------------------------
 % Receive and Xccorlation, Compressed Sensing Framework
 %-------------------------------------------------------
-    
+
 for i = 1:num_ap
     
     %receive signal from all channels
     ap_tag_chan_wgn_tmp = ap_tag_chan_wgn(:,:,i);
     received_signl_ap = sum(ap_tag_chan_wgn_tmp)/num_bits;
-       
+
     %xccorlation
     xc = xcorr(ref, received_signl_ap); 
     [a,delay(i)]=max(xc);
     TOA(i) = (length(sig) - delay(i)) * ts;
     
-    %----------------------------------
-    %compressed sensing framework at RX 
-    %----------------------------------
-    if compressed_sensing_receivers==1    
-        load randmodu.mat
-        y_cs = A*received_signl_ap';
-        received_signl_ap_cs_rx = cosamp(A,y_cs,1,1e-5,20);
-
-        %xccorlation
-        xc_cs_rx = xcorr(ref, received_signl_ap_cs_rx);
-        [a,cs_delay(i)]=max(xc_cs_rx);
-        CS_RX_TOA(i) = (length(sig) - cs_delay(i)) * ts;
-	
-    end
-    %----------------------------------
     %random projection recovery from TX 
-    %----------------------------------
-    if rand_proj_valid == 1
-        if channel_matrix_valid > 0
-            received_signl_ap_cs_tx = cosamp(D*channel_matrix',received_signl_ap',1,1e-5,20);
-	    else
-            received_signl_ap_cs_tx = cosamp(D,received_signl_ap',1,1e-5,20);
-	    end 
+    if channel_matrix_valid > 0 % common case
+        received_signl_ap_cs_tx = cosamp(D*channel_matrix',received_signl_ap',1,1e-5,20);
+    else
+        received_signl_ap_cs_tx = cosamp(D,received_signl_ap',1,1e-5,20);
+    end 
 
-        %xccorlation
-        xc_cs_tx = xcorr(ref, received_signl_ap_cs_tx);
-        [a,cs_delay(i)]=max(xc_cs_tx);
-        CS_TX_TOA(i) = (length(sig) - cs_delay(i)) * ts;
-    end
+    %xccorlation
+    xc_cs_tx = xcorr(ref, received_signl_ap_cs_tx);
+    [a,cs_delay(i)]=max(xc_cs_tx);
+    CS_TX_TOA(i) = (length(sig) - cs_delay(i)) * ts;
     
 end
 
 %-------------------------------------------------------
-% TOA locationing  
-%-------------------------------------------------------
-
-time_ap_tag = time_ap_tag;
-time_dur = TOA;
-toa_error = toa(AP, Tag, time_dur, light_speed);
-
-%-------------------------------------------------------
 % CS(compressed sensing) + TOA locationing  
 %-------------------------------------------------------
-
-%compressed sensing framework at RX 
-% cs_rx_time_dur = CS_RX_TOA;
-% cs_rx_toa_error = toa(AP, Tag, cs_rx_time_dur, light_speed);
-
-%random projection recovery from TX 
+time_ap_tag = time_ap_tag;
 cs_tx_time_dur = CS_TX_TOA;
 cs_tx_toa_error = toa(AP, Tag, cs_tx_time_dur, light_speed);
-
-if ccprint == 1
-    %if toa_error > 0.1 || cs_rx_toa_error > 0.1 || cs_tx_toa_error > 0.1
-    if toa_error > 0.1 || cs_tx_toa_error > 0.1
-        disp('error!!') 
-    else
-        toa_error
-    %    cs_rx_toa_error
-        cs_tx_toa_error
-    end
-end    
