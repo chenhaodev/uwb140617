@@ -1,5 +1,4 @@
 function [cs_tx_toa_error, cs_tx_time_dur] = uwb_posistion_cs_tx_toa(tag_x,tag_y,EbNo,pulse_order);
-% e.g. uwb_posistion_cs_tx_toa(1,1)
 %------------------------------------------------------------------------------
 %                          UWB positioning system
 % Programmed by Chenhao
