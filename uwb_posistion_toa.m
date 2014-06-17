@@ -1,5 +1,4 @@
-function toa_error = uwb_posistion_toa(tag_x,tag_y)
-% e.g. uwb_posistion_cs_tx_toa(1,1)
+function [toa_error, time_dur] = uwb_posistion_toa(tag_x,tag_y,EbNo,pulse_order);
 %------------------------------------------------------------------------------
 %                          UWB positioning system
 % Programmed by Chenhao
@@ -10,7 +9,6 @@ function toa_error = uwb_posistion_toa(tag_x,tag_y)
 % - Indoor channel ieee802.15.4a, LOS, CM1
 %------------------------------------------------------------------------------
 
-%clear all;
 close all;
 clc;
 
@@ -30,7 +28,7 @@ t1 = .5E-9; %pulse width(0.5 nanoseconds)
 pri = 200e-9;
 
 % The SNR range (in dB)
-EbNo = -15;
+%EbNo = -15;
  
 % Number of bits
 num_bits = 10;
@@ -40,6 +38,7 @@ num_bits = 10;
 %------------------------------------------------------------------------------
 
 % Tag's initial coordinate
+% Tag = [1 1];
 Tag = [tag_x tag_y];
 
 % Coordinates of APs
@@ -52,9 +51,10 @@ num_ap = length(AP);
 % Gaussian pulse generation
 %------------------------------------------------------------------------------
 
-pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
+%pulse_order = 1; % 0-Gaussian pulse, 1-First derivative of Gaussian pulse, 2 - Second derivative;
 A = 1; %positive amplitude
 [y] = monocycle(fs, ts, t, t1, A, pulse_order);
+ref = y;
 n_pulse_pri = round(pri/ts);          % Sampling of PRI
 sig = zeros(1,n_pulse_pri);    
 sig(1:length(y)) = y;                 % One pulse in one PRI
@@ -80,7 +80,7 @@ hi = abs(h);
 %------------------------------------------------------------------------------
 % Transmission
 %------------------------------------------------------------------------------
-   
+
 for j = 1:num_bits
     for i = 1:num_ap
         % delayed signals 
@@ -99,7 +99,7 @@ end
 % additive white gaussian noise (AWGN)  
 %-------------------------------------------------------
 
-noise_var   = 10^(-EbNo/10);
+noise_var = 10^(-EbNo/10);
 for j = 1:num_bits
     for i = 1:num_ap
         ap_tag_chan_wgn(j,:,i) = ap_tag_chan(j,:,i)/std(ap_tag_chan(j,:,i)) + randn(1,length(ap_tag_chan(j,:,i))) .* sqrt(noise_var);
@@ -113,7 +113,9 @@ end
 for i = 1:num_ap
     ap_tag_chan_wgn_tmp = ap_tag_chan_wgn(:,:,i);
     received_signl_ap = sum(ap_tag_chan_wgn_tmp)/num_bits;
-    xc = xcorr(y, received_signl_ap);
+
+    %xccorlation
+    xc = xcorr(ref, received_signl_ap); 
     [a,delay(i)]=max(xc);
     TOA(i) = (length(sig) - delay(i)) * ts;
 end
