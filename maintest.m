@@ -1,4 +1,5 @@
 function maintest(tag_x,tag_y,EbNo,pulse_order)
+args = argv; 
 
 pkg load signal
 disp('load <signal> package .. ');
