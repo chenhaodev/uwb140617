@@ -1,12 +1,12 @@
- Tag position: [1 1]
- EbNo = -15 dB
+# Tag position: [1 1]
+# EbNo = -15 dB
 toa_error =  0.039209
-cs_rx_toa_error =  11.406
+cs_rx_toa_error =  0.031105
 cs_tx_toa_error =  0.0094752
- generated ...done 
- Tag position: [2 2]
- EbNo = -15 dB
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
 toa_error =  0.024761
-cs_rx_toa_error =  0.057222
+cs_rx_toa_error =  0.028831
 cs_tx_toa_error =  0.0096997
- generated ...done 
+generated ...done 
