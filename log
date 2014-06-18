@@ -1,26 +1,12 @@
-tag_x =  1
-tag_y =  1
-EbNo = -15
-pulse_order =  1
-debug =  1
-load <signal> package .. 
+ Tag position: [1 1]
+ EbNo = -15 dB
 toa_error =  0.039209
-
-load <signal> package .. 
-toa_error =  0.039209
-
-load <signal> package .. 
-toa_error =  0.024761
-
-tag:[1 1]EbNo = -15
-load <signal> package .. 
-toa_error =  0.039209
-cs_rx_toa_error =  0.039209
+cs_rx_toa_error =  11.406
 cs_tx_toa_error =  0.0094752
-results generated .. done
-tag:[2 2]EbNo = -15
-load <signal> package .. 
+ generated ...done 
+ Tag position: [2 2]
+ EbNo = -15 dB
 toa_error =  0.024761
-cs_rx_toa_error =  0.046482
+cs_rx_toa_error =  0.057222
 cs_tx_toa_error =  0.0096997
-results generated .. done
+ generated ...done 
