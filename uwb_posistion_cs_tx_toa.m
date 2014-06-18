@@ -78,7 +78,7 @@ sig(1:length(y)) = y;                 % One pulse in one PRI
 % random projection on pulse generation
 %------------------------------------------------------------------------------
 
-fix_randinx = 1;
+fix_randinx = 0;
 % random projection matrix
 if fix_randinx == 1 
     load randinx.mat;
