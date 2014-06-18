@@ -1,4 +1,4 @@
-function [toa_error, time_dur] = uwb_posistion_toa(tag_x,tag_y,EbNo,pulse_order);
+function maintest(tag_x,tag_y,EbNo,pulse_order)
 
 pkg load signal
 disp('load <signal> package .. ');
@@ -8,3 +8,4 @@ disp('load <signal> package .. ');
 [cs_tx_toa_error, cs_tx_time_dur] = uwb_posistion_cs_tx_toa(tag_x,tag_y,EbNo,pulse_order)
 
 disp('results generated .. done');
+
