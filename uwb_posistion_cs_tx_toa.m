@@ -78,7 +78,7 @@ sig(1:length(y)) = y;                 % One pulse in one PRI
 % random projection on pulse generation
 %------------------------------------------------------------------------------
 
-fix_randinx = 1
+fix_randinx = 1;
 % random projection matrix
 if fix_randinx == 1 
     load randinx.mat;
@@ -136,7 +136,7 @@ end
 % e.g. figure; plot((channel_matrix_tmp(:,:,1)'*sig')')
 %------------------------------------------------------------------------------
 
-channel_matrix_valid = 2
+channel_matrix_valid = 2;
 
 if channel_matrix_valid == 1
     for j = 1:num_bits
