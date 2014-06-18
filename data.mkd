@@ -1,0 +1,24 @@
+Data Logs 
+=====================
+
+`tags:` `research`; `octave38`; `uwb`; `sim`;  
+
+
+----------
+
+
+### Working Env
+
+| Updated      |Date       | Details                            | 
+| -------------|------------|------------------------------------|
+| git          | 2014/06/17 | github (`uwb_toa_cs = dreamclinger/uwb140617`)
+
+
+###UWB simulation
+
+|Updated   |Date      |Cost |Key Ideas |   Details                      |
+|----------|----------|-----|----------|--------------------------------|
+|toa algm  |2014/06/17|0.5h |`math`    | uwb                            
+|          |          |     |`nodes`   | extend the nodes                   
+|func para |2014/06/17|1.2h |`loop `   |                                 
+
