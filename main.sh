@@ -6,3 +6,4 @@ pulse_order=$4
 debug=$5
  
 ~/.octave38/bin/octave -qf maintest.m $tag_x $tag_y $EbNo $pulse_order $debug
+
