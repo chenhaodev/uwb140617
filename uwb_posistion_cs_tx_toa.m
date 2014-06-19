@@ -179,6 +179,7 @@ for i = 1:num_ap
     TOA(i) = (length(sig) - delay(i)) * ts;
     
     %random projection recovery from TX 
+    u = cohere(length(sig),D,channel_matrix')
     if channel_matrix_valid > 0 % common case
         received_signl_ap_cs_tx = cosamp(D*channel_matrix',received_signl_ap',1,1e-5,20);
     else
