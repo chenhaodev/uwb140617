@@ -16,10 +16,11 @@ for j in range(0,5):
   debug = 1;
   cmd1= "echo "+ "\""+ "#****** bgn loop:" + str(j) + " *******#" +"\""+ " >> log"
   os.system(cmd1)
-  for i in range(0,9):
-    cmd2="./main.sh "+str(tag_x)+" "+str(tag_y)+" "+str(EbNo)+" "+str(pulse_order)+" "+str(debug)
-    os.system(cmd2)
+  for k in range(0,9):
+    for i in range(0,9):
+      cmd2="./main.sh "+str(tag_x)+" "+str(tag_y)+" "+str(EbNo)+" "+str(pulse_order)+" "+str(debug)
+      os.system(cmd2)
+      tag_y = tag_y + 1;
     tag_x = tag_x + 1;
-    tag_y = tag_y + 1;
-  cmd3= "echo "+ "\""+ "#****** end loop:" + str(j) + " *******#" +"\""+ " >> log"
-  os.system(cmd3)
+    cmd3= "echo "+ "\""+ "#****** end loop:" + str(j) + " *******#" +"\""+ " >> log"
+    os.system(cmd3)
