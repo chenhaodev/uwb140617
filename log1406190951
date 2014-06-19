@@ -1,0 +1,280 @@
+#****** bgn loop:0 *******#
+# Tag position: [1 1]
+# EbNo = -15 dB
+toa_error =  0.039209
+cs_rx_toa_error =  0.025988
+cs_tx_toa_error =  0.025608
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
+toa_error =  0.034684
+cs_rx_toa_error =  0.046482
+cs_tx_toa_error =  0.016398
+generated ...done 
+# Tag position: [3 3]
+# EbNo = -15 dB
+toa_error =  0.017457
+cs_rx_toa_error =  0.048990
+cs_tx_toa_error =  3.3277
+generated ...done 
+# Tag position: [4 4]
+# EbNo = -15 dB
+toa_error =  0.012077
+cs_rx_toa_error =  0.047840
+cs_tx_toa_error =  0.030738
+generated ...done 
+# Tag position: [5 5]
+# EbNo = -15 dB
+toa_error = 0
+cs_rx_toa_error = 0
+cs_tx_toa_error =  0.042570
+generated ...done 
+# Tag position: [6 6]
+# EbNo = -15 dB
+toa_error =  0.0070976
+cs_rx_toa_error =  0.0082873
+cs_tx_toa_error =  0.0070976
+generated ...done 
+# Tag position: [7 7]
+# EbNo = -15 dB
+toa_error =  0.0084401
+cs_rx_toa_error =  0.063755
+cs_tx_toa_error =  1.9171
+generated ...done 
+# Tag position: [8 8]
+# EbNo = -15 dB
+toa_error =  0.0026304
+cs_rx_toa_error =  0.038990
+cs_tx_toa_error =  0.024044
+generated ...done 
+# Tag position: [9 9]
+# EbNo = -15 dB
+toa_error =  0.049519
+cs_rx_toa_error =  0.014628
+cs_tx_toa_error =  0.012403
+generated ...done 
+#****** end loop:0 *******#
+#****** bgn loop:1 *******#
+# Tag position: [1 1]
+# EbNo = -15 dB
+toa_error =  0.049802
+cs_rx_toa_error =  0.019942
+cs_tx_toa_error =  0.0037459
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
+toa_error =  0.024761
+cs_rx_toa_error =  0.036853
+cs_tx_toa_error =  0.030371
+generated ...done 
+# Tag position: [3 3]
+# EbNo = -15 dB
+toa_error =  0.017457
+cs_rx_toa_error =  0.013011
+cs_tx_toa_error =  0.022032
+generated ...done 
+# Tag position: [4 4]
+# EbNo = -15 dB
+toa_error =  0.012077
+cs_rx_toa_error =  0.0032792
+cs_tx_toa_error =  0.044496
+generated ...done 
+# Tag position: [5 5]
+# EbNo = -15 dB
+toa_error = 0
+cs_rx_toa_error = 0
+cs_tx_toa_error = 0
+generated ...done 
+# Tag position: [6 6]
+# EbNo = -15 dB
+toa_error =  0.0070976
+cs_rx_toa_error =  0.0082873
+cs_tx_toa_error =  2.1817
+generated ...done 
+# Tag position: [7 7]
+# EbNo = -15 dB
+toa_error =  0.0084401
+cs_rx_toa_error =  0.075448
+cs_tx_toa_error =  0.0038467
+generated ...done 
+# Tag position: [8 8]
+# EbNo = -15 dB
+toa_error =  0.0026304
+cs_rx_toa_error =  0.031453
+cs_tx_toa_error =  0.038990
+generated ...done 
+# Tag position: [9 9]
+# EbNo = -15 dB
+toa_error =  0.022424
+cs_rx_toa_error =  0.068786
+cs_tx_toa_error =  0.041691
+generated ...done 
+#****** end loop:1 *******#
+#****** bgn loop:2 *******#
+# Tag position: [1 1]
+# EbNo = -15 dB
+toa_error =  0.039209
+cs_rx_toa_error =  5.1511
+cs_tx_toa_error =  0.021336
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
+toa_error =  0.024761
+cs_rx_toa_error =  0.046482
+cs_tx_toa_error =  0.045867
+generated ...done 
+# Tag position: [3 3]
+# EbNo = -15 dB
+toa_error =  0.017457
+cs_rx_toa_error =  0.048990
+cs_tx_toa_error =  0.027266
+generated ...done 
+# Tag position: [4 4]
+# EbNo = -15 dB
+toa_error =  0.021214
+cs_rx_toa_error =  0.047840
+cs_tx_toa_error =  0.017439
+generated ...done 
+# Tag position: [5 5]
+# EbNo = -15 dB
+toa_error = 0
+cs_rx_toa_error = 0
+cs_tx_toa_error =  2.3221
+generated ...done 
+# Tag position: [6 6]
+# EbNo = -15 dB
+toa_error =  0.0070976
+cs_rx_toa_error =  3.3328
+cs_tx_toa_error =  8.7489
+generated ...done 
+# Tag position: [7 7]
+# EbNo = -15 dB
+toa_error =  0.0058266
+cs_rx_toa_error =  0.026693
+cs_tx_toa_error =  0.033319
+generated ...done 
+# Tag position: [8 8]
+# EbNo = -15 dB
+toa_error =  0.0026304
+cs_rx_toa_error =  0.031453
+cs_tx_toa_error =  0.15778
+generated ...done 
+# Tag position: [9 9]
+# EbNo = -15 dB
+toa_error =  0.022424
+cs_rx_toa_error =  1.3844
+cs_tx_toa_error =  0.0068324
+generated ...done 
+#****** end loop:2 *******#
+#****** bgn loop:3 *******#
+# Tag position: [1 1]
+# EbNo = -15 dB
+toa_error =  0.039209
+cs_rx_toa_error =  0.019233
+cs_tx_toa_error =  0.028201
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
+toa_error =  0.024761
+cs_rx_toa_error =  0.036853
+cs_tx_toa_error =  0.035782
+generated ...done 
+# Tag position: [3 3]
+# EbNo = -15 dB
+toa_error =  0.017457
+cs_rx_toa_error =  1.9108
+cs_tx_toa_error =  0.010297
+generated ...done 
+# Tag position: [4 4]
+# EbNo = -15 dB
+toa_error =  0.012077
+cs_rx_toa_error =  2.2784
+cs_tx_toa_error =  0.051518
+generated ...done 
+# Tag position: [5 5]
+# EbNo = -15 dB
+toa_error = 0
+cs_rx_toa_error = 0
+cs_tx_toa_error =  0.010541
+generated ...done 
+# Tag position: [6 6]
+# EbNo = -15 dB
+toa_error =  0.0070976
+cs_rx_toa_error =  0.017756
+cs_tx_toa_error =  0.46160
+generated ...done 
+# Tag position: [7 7]
+# EbNo = -15 dB
+toa_error =  0.0058266
+cs_rx_toa_error =  0.054368
+cs_tx_toa_error =  0.063900
+generated ...done 
+# Tag position: [8 8]
+# EbNo = -15 dB
+toa_error =  0.0026304
+cs_rx_toa_error =  69.170
+cs_tx_toa_error =  0.026702
+generated ...done 
+# Tag position: [9 9]
+# EbNo = -15 dB
+toa_error =  0.022424
+cs_rx_toa_error =  0.014628
+cs_tx_toa_error =  0.10870
+generated ...done 
+#****** end loop:3 *******#
+#****** bgn loop:4 *******#
+# Tag position: [1 1]
+# EbNo = -15 dB
+toa_error =  0.039209
+cs_rx_toa_error =  0.031105
+cs_tx_toa_error =  0.022981
+generated ...done 
+# Tag position: [2 2]
+# EbNo = -15 dB
+toa_error =  0.024761
+cs_rx_toa_error =  0.046482
+cs_tx_toa_error =  0.0011190
+generated ...done 
+# Tag position: [3 3]
+# EbNo = -15 dB
+toa_error =  0.0081105
+cs_rx_toa_error =  0.013011
+cs_tx_toa_error =  0.010297
+generated ...done 
+# Tag position: [4 4]
+# EbNo = -15 dB
+toa_error =  0.012077
+cs_rx_toa_error =  0.039506
+cs_tx_toa_error =  0.029387
+generated ...done 
+# Tag position: [5 5]
+# EbNo = -15 dB
+toa_error =  0.010654
+cs_rx_toa_error = 0
+cs_tx_toa_error =  0.010586
+generated ...done 
+# Tag position: [6 6]
+# EbNo = -15 dB
+toa_error =  0.019111
+cs_rx_toa_error =  0.017756
+cs_tx_toa_error =  0.078674
+generated ...done 
+# Tag position: [7 7]
+# EbNo = -15 dB
+toa_error =  0.0084401
+cs_rx_toa_error =  0.053497
+cs_tx_toa_error =  0.048020
+generated ...done 
+# Tag position: [8 8]
+# EbNo = -15 dB
+toa_error =  0.0026304
+cs_rx_toa_error =  0.019953
+cs_tx_toa_error =  0.044399
+generated ...done 
+# Tag position: [9 9]
+# EbNo = -15 dB
+toa_error =  0.022424
+cs_rx_toa_error =  0.010851
+cs_tx_toa_error =  0.58622
+generated ...done 
+#****** end loop:4 *******#
