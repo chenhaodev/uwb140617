@@ -1,0 +1,8 @@
+a eq_dis l 
+ b eq_dis m 
+  c eq_dis n 
+   d eq_dis o 
+    ... ...
+
+// if o > edge of matrix, stop adding 
+// if o > {a,b,...}, reduce card{a,b,...} 
