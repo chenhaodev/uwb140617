@@ -1,0 +1,10 @@
+chen@chen-X201EP:~/Codes/uwb140617$ ./test.py 
+error: uwb_posistion_toa: A(I,J,...) = X: dimensions mismatch
+error: called from:
+error:   /home/chen/Codes/uwb140617/uwb_posistion_toa.m at line 89, column 29
+error:   /home/chen/Codes/uwb140617/maintest.m at line 12, column 14
+error: uwb_posistion_toa: A(I,J,...) = X: dimensions mismatch
+error: called from:
+error:   /home/chen/Codes/uwb140617/uwb_posistion_toa.m at line 89, column 29
+error:   /home/chen/Codes/uwb140617/maintest.m at line 12, column 14
+
